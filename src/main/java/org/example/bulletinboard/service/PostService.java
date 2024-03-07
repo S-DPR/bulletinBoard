@@ -5,6 +5,7 @@ import org.example.bulletinboard.repos.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -14,8 +15,12 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public List<Post> getAll() {
+    public List<Post> findAll() {
         return postRepository.findAll();
+    }
+
+    public Optional<Post> findById(String id) {
+        return postRepository.findById(id);
     }
 
     public Post save(Post post) {
