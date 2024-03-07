@@ -1,11 +1,12 @@
 package org.example.bulletinboard.controller;
 
-import jakarta.annotation.Nullable;
 import org.example.bulletinboard.model.Post;
 import org.example.bulletinboard.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping
@@ -17,6 +18,8 @@ public class PostListController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
+        List<Post> posts = postService.findAll();
+        model.addAttribute("posts", posts);
         return "index";
     }
 
@@ -36,8 +39,7 @@ public class PostListController {
 
     @PostMapping("/postWrite")
     public String submitWritePost(@ModelAttribute Post post) {
-        System.out.println(post.getId() + " " +post.getContent());
         postService.save(post);
-        return "index";
+        return "redirect:/";
     }
 }
