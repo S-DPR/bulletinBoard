@@ -32,6 +32,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.postgresql:postgresql:42.2.18'
+    implementation 'org.webjars:bootstrap:5.2.3'
 }
 
 tasks.named('test') {
