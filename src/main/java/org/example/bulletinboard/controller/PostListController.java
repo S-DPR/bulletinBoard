@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PostListController {
     @GetMapping("/")
     public String mainPage() {
-        return "/";
+        return "index";
     }
 }

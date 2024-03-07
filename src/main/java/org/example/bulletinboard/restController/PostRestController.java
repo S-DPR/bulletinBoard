@@ -2,8 +2,6 @@ package org.example.bulletinboard.restController;
 
 import org.example.bulletinboard.model.Post;
 import org.example.bulletinboard.service.PostService;
-import org.hibernate.query.criteria.JpaCriteriaUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +23,7 @@ public class PostRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity createPost(@RequestBody Post post) {
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {
         return response(postService.save(post));
     }
 
