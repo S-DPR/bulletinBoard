@@ -22,5 +22,5 @@ public class Post {
     @CreatedDate
     private Timestamp createTime;
     @LastModifiedDate
-    private Timestamp editTime;
+    private Timestamp updateTime;
 }

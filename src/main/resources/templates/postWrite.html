@@ -5,25 +5,26 @@
     <title>Title</title>
     <th:block th:replace="~{/fragment/import :: bootstrapImport}"></th:block>
     <script th:src="@{/js/utils.js}"></script>
-    <script th:src="@{/js/postWrite.js}"></script>
 </head>
 <body>
-    <input id="id" type="hidden" th:value="${post.id}">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-text" id="title">Title</span>
-            <input type="text" class="form-control" th:value="${post.title}"
-                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <form th:action="@{/postWrite}" th:method="POST">
+        <input id="id" type="hidden" th:field="${post.id}">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-text">Title</span>
+                <input type="text" class="form-control" th:field="${post.title}" id="title"
+                       aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-text" id="content">Content</span>
-            <textarea type="text" class="form-control" th:value="${post.content}"
-                      aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-            style="height:100vh;"></textarea>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-text">Content</span>
+                <textarea type="text" class="form-control" th:field="${post.content}" id="content"
+                          aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                style="height:100vh;"></textarea>
+            </div>
         </div>
-    </div>
-    <button id="submitBtn" type="button">완료</button>
+        <button id="submitBtn" type="submit">완료</button>
+    </form>
 </body>
 </html>

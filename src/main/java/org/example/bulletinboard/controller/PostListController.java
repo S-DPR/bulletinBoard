@@ -1,13 +1,11 @@
 package org.example.bulletinboard.controller;
 
+import jakarta.annotation.Nullable;
 import org.example.bulletinboard.model.Post;
 import org.example.bulletinboard.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
@@ -18,7 +16,7 @@ public class PostListController {
     }
 
     @GetMapping("/")
-    public String mainPage() {
+    public String mainPage(Model model) {
         return "index";
     }
 
@@ -34,5 +32,12 @@ public class PostListController {
         if (findPost == null) return "index";
         model.addAttribute("post", findPost);
         return "postWrite";
+    }
+
+    @PostMapping("/postWrite")
+    public String submitWritePost(@ModelAttribute Post post) {
+        System.out.println(post.getId() + " " +post.getContent());
+        postService.save(post);
+        return "index";
     }
 }
