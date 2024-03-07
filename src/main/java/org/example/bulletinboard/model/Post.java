@@ -1,4 +1,4 @@
-package org.example.bulletinboard.Model;
+package org.example.bulletinboard.model;
 
 import lombok.Getter;
 import lombok.Setter;
