@@ -42,4 +42,12 @@ public class PostListController {
         postService.save(post);
         return "redirect:/";
     }
+
+    @GetMapping("/{id}")
+    public String readContent(@PathVariable String id, Model model) {
+        Post findPost = postService.findById(id).orElse(null);
+        if (findPost == null) return "index";
+        model.addAttribute("post", findPost);
+        return "read";
+    }
 }

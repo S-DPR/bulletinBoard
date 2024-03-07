@@ -19,8 +19,8 @@
         </thead>
         <tbody>
             <tr th:each="post:${posts}">
-                <td th:text="${post.title}"></td>
-                <td th:text="${post.id}"></td>
+                <td><a th:href="@{/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
+                <td th:text="${post.writer}"></td>
             </tr>
         </tbody>
     </table>

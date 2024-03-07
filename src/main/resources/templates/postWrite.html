@@ -8,18 +8,19 @@
 </head>
 <body>
     <form th:action="@{/postWrite}" th:method="POST">
-        <input id="id" type="hidden" th:field="${post.id}">
+        <input type="hidden" th:field="${post.id}">
+        <input th:field="${post.writer}">
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-text">Title</span>
-                <input type="text" class="form-control" th:field="${post.title}" id="title"
+                <input type="text" class="form-control" th:field="${post.title}"
                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-text">Content</span>
-                <textarea type="text" class="form-control" th:field="${post.content}" id="content"
+                <textarea type="text" class="form-control" th:field="${post.content}"
                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                 style="height:100vh;"></textarea>
             </div>
