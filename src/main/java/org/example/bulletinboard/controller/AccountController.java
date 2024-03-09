@@ -1,7 +1,8 @@
 package org.example.bulletinboard.controller;
 
-import org.example.bulletinboard.model.User;
-import org.example.bulletinboard.service.UserService;
+import jakarta.servlet.http.HttpSession;
+import org.example.bulletinboard.model.Account;
+import org.example.bulletinboard.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class AccountController {
-    private final UserService userService;
+    private final AccountService accountService;
     @Autowired
-    AccountController(UserService userService) {
-        this.userService = userService;
+    AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping("")
@@ -24,9 +25,10 @@ public class AccountController {
     }
 
     @PostMapping("/validate")
-    public String login(@ModelAttribute User user) {
-        boolean result = userService.login(user);
+    public String login(@ModelAttribute Account account, HttpSession session) {
+        boolean result = accountService.login(account);
         if (!result) return "redirect:/login";
+        session.setAttribute("login", account);
         return "redirect:/";
     }
 }
