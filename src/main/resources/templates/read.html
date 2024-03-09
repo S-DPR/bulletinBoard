@@ -9,8 +9,9 @@
 </head>
 <body>
   <input th:field="${post.id}" hidden>
-  <button id="editBtn" type="button" class="btn btn-secondary" hidden>수정</button>
-  <button id="delBtn" type="button" class="btn btn-secondary" hidden>삭제</button>
+  <button id="mainBtn" class="btn btn-secondary">메인</button>
+  <button id="editBtn" class="btn btn-secondary">수정</button>
+  <button id="delBtn" class="btn btn-secondary">삭제</button>
   <div th:text="${post.writer}"></div>
   <div class="card card-frame">
     <div class="card-body shadow-sm border border-radius-sm">
