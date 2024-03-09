@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/post")
-public class PostRestController {
+@RequestMapping("/sys/post")
+public class PostRestController extends GenericRestController {
     private final PostService postService;
 
     PostRestController(PostService postService) {
@@ -18,12 +18,12 @@ public class PostRestController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Post>> getAllPost() {
+    public ResponseEntity getAllPost() {
         return response(postService.findAll());
     }
 
     @PostMapping("/")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+    public ResponseEntity createPost(@RequestBody Post post) {
         return response(postService.save(post));
     }
 
@@ -31,12 +31,5 @@ public class PostRestController {
     public ResponseEntity deletePost(@PathVariable String id) {
         postService.delete(id);
         return response("200");
-    }
-
-    private ResponseEntity response(Object result){
-        if (result == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
