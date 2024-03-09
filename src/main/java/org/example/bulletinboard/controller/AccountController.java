@@ -1,34 +1,34 @@
 package org.example.bulletinboard.controller;
 
-import jakarta.servlet.http.HttpSession;
 import org.example.bulletinboard.model.Account;
 import org.example.bulletinboard.service.AccountService;
+import org.example.bulletinboard.service.AccountSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/login")
 public class AccountController {
     private final AccountService accountService;
+    private final AccountSessionService accountSessionService;
     @Autowired
-    AccountController(AccountService accountService) {
+    AccountController(AccountService accountService, AccountSessionService accountSessionService) {
         this.accountService = accountService;
+        this.accountSessionService = accountSessionService;
     }
 
     @GetMapping("")
-    public String loginMain() {
-        return "login";
+        public String loginMain() {
+        Account currentAccount = accountSessionService.getCurrentAccountSession();
+        return currentAccount == null ? "login" : "redirect:/";
     }
 
     @PostMapping("/validate")
-    public String login(@ModelAttribute Account account, HttpSession session) {
+    public String login(@ModelAttribute Account account) {
         boolean result = accountService.login(account);
         if (!result) return "redirect:/login";
-        session.setAttribute("login", account);
+        accountSessionService.setAccountSession(account);
         return "redirect:/";
     }
 }
