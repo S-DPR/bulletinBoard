@@ -3,7 +3,7 @@ window.addEventListener('load', () => {
     const dels = document.querySelector('.del-btn') || []
 
     const refreshTable = () => {
-        requestFn(REQUEST_TYPE.GET, "/post/", null, (data) => {
+        requestFn(REQUEST_TYPE.GET, "/sys/post/", null, (data) => {
             data.forEach(data => {
                 const tr = document.createElement('tr')
                 tr.dataset.id = data.id

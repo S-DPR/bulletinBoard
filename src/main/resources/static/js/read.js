@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
         location.href = `/postWrite/${postId}`
     })
     delBtn.addEventListener('click', () => {
-        requestFn(REQUEST_TYPE.DELETE, `/post/${postId}`, null, () => {
+        requestFn(REQUEST_TYPE.DELETE, `/sys/post/${postId}`, null, () => {
             location.href = `/`
         })
     })
