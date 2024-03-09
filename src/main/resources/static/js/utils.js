@@ -11,7 +11,7 @@ const requestFn = (type, endPoint, param, callback) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body:JSON.stringify(param)
+        body:JSON.stringify(param || {})
     }
     if (type == REQUEST_TYPE.GET) {
         init = null
