@@ -28,8 +28,9 @@ public class PostRestController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable String id) {
+    public ResponseEntity deletePost(@PathVariable String id) {
         postService.delete(id);
+        return response("200");
     }
 
     private ResponseEntity response(Object result){
