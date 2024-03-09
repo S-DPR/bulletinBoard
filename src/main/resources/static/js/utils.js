@@ -6,13 +6,17 @@ const REQUEST_TYPE = {
     DELETE: 'DELETE'
 }
 const requestFn = (type, endPoint, param, callback) => {
-    fetch(endPoint, {
+    let init = {
         method: type,
         headers: {
-        'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body:JSON.stringify(param)
-    })
+    }
+    if (type == REQUEST_TYPE.GET) {
+        init = null
+    }
+    fetch(endPoint, init)
         .then((response) => {
             if (!response.ok)
                 throw new Error('400 or 500 Error')
