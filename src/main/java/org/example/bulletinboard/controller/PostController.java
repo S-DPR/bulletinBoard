@@ -10,9 +10,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping
-public class PostListController {
+public class PostController {
     private final PostService postService;
-    PostListController(PostService postService) {
+    PostController(PostService postService) {
         this.postService = postService;
     }
 
@@ -40,7 +40,7 @@ public class PostListController {
     @PostMapping("/postWrite")
     public String submitWritePost(@ModelAttribute Post post) {
         postService.save(post);
-        return "redirect:/";
+        return "redirect:/" + post.getId();
     }
 
     @GetMapping("/{id}")
