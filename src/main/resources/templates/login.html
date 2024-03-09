@@ -6,14 +6,14 @@
     <th:block th:replace="~{/fragment/import :: bootstrapImport}"></th:block>
 </head>
 <body>
-    <form>
+    <form th:action="@{/login/validate}" th:method="POST">
         <label>
             <input id="id" name="id">
         </label>
         <label>
             <input id="pw" name="pw">
         </label>
-        <button id="loginBtn"></button>
+        <button type="submit" id="loginBtn">로그인 / 회원가입</button>
     </form>
 </body>
 </html>
