@@ -53,7 +53,9 @@ public class PostController {
     public String readContent(@PathVariable String id, Model model) {
         Post findPost = postService.findById(id).orElse(null);
         if (findPost == null) return "index";
+        String currentAccountId = accountSessionService.getCurrentAccountSession().getId();
         model.addAttribute("post", findPost);
+        model.addAttribute("reader", currentAccountId);
         return "read";
     }
 }
