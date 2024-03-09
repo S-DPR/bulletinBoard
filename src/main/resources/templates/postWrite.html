@@ -9,7 +9,7 @@
 <body>
     <form th:action="@{/postWrite}" th:method="POST">
         <input type="hidden" th:field="${post.id}">
-        <input type="hidden" th:field="${post.createTime}">
+        <input type="hidden" th:field="${post.createTime}" th:if="${post.id}">
         <input th:field="${post.writer}">
         <div class="form-group">
             <div class="input-group">
