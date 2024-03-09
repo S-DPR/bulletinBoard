@@ -27,6 +27,11 @@ public class PostRestController {
         return response(postService.save(post));
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable String id) {
+        postService.delete(id);
+    }
+
     private ResponseEntity response(Object result){
         if (result == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
