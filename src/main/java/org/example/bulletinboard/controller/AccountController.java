@@ -24,7 +24,7 @@ public class AccountController {
         return currentAccount == null ? "login" : "redirect:/";
     }
 
-    @PostMapping("/validate")
+    @PostMapping("")
     public String login(@ModelAttribute Account account) {
         boolean result = accountService.login(account);
         if (!result) return "redirect:/login";
