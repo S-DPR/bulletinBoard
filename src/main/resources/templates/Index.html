@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Main</title>
     <th:block th:replace="~{/fragment/import :: bootstrapImport}"></th:block>
+    <script th:src="@{/js/utils.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
 </head>
 
 <body>
@@ -17,11 +19,7 @@
             <th scope="col" class="text-secondary text-xs font-weight-semibold opacity-7 border-light ps-2">작성자</th>
         </tr>
         </thead>
-        <tbody>
-            <tr th:each="post:${posts}">
-                <td><a th:href="@{/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
-                <td th:text="${post.writer}"></td>
-            </tr>
+        <tbody id="postListTBody">
         </tbody>
     </table>
 </body>
