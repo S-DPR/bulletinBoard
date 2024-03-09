@@ -20,6 +20,10 @@ const requestFn = (type, endPoint, param, callback) => {
         .then((response) => {
             if (!response.ok)
                 throw new Error('400 or 500 Error')
-            callback(response)
+            return response.json()
         })
+        .then((data) => {
+            callback(data)
+        })
+        .catch(error => console.log(error))
 }
