@@ -25,7 +25,7 @@ public class PostController {
     public String mainPage(@ModelAttribute FilterDTO filterDTO, Model model) {
         Page<Post> posts = postService.findByFilter(filterDTO);
         model.addAttribute("posts", posts.getContent());
-        model.addAttribute("pagination", postService.getPaginationRange(filterDTO.getPage()));
+        model.addAttribute("pagination", postService.getPaginationRange(filterDTO));
         return "index";
     }
 

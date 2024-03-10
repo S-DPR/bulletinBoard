@@ -18,5 +18,13 @@ public interface PostRepository extends JpaRepository<Post, String> {
                             @Param("content") String content,
                             @Param("writer") String writer,
                             Pageable pageable);
+
+    @Query("SELECT COUNT(p) FROM Post p " +
+            "WHERE (:title IS NULL OR p.title LIKE %:title%) " +
+            "AND (:content IS NULL OR p.content LIKE %:content%) " +
+            "AND (:writer IS NULL OR p.writer = :writer)")
+    long countByFilter(@Param("title") String title,
+                            @Param("content") String content,
+                            @Param("writer") String writer);
 }
 

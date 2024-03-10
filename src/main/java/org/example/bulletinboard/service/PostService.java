@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Filter;
 
 @Service
 public class PostService {
@@ -30,24 +31,26 @@ public class PostService {
     }
 
     public Page<Post> findByFilter(FilterDTO filterDTO) {
-        Pageable pageable = PageRequest.of(filterDTO.getPage(), 10, Sort.by("createTime"));
+        // 여기서 filterDTO.getPage는 1-based이므로
+        Pageable pageable = PageRequest.of(filterDTO.getPage()-1, 10, Sort.by("createTime"));
         return postRepository.findByFilter(filterDTO.getTitle(), filterDTO.getContent(), filterDTO.getWriter(), pageable);
     }
 
-    public long count() {
-        return postRepository.count();
+    public long countByFilter(FilterDTO filterDTO) {
+        return postRepository.countByFilter(filterDTO.getTitle(), filterDTO.getContent(), filterDTO.getWriter());
     }
 
-    public List<Integer> getPaginationRange(int currentPage) {
-        int maxPage = (int)count()/10;
+    public List<Integer> getPaginationRange(FilterDTO filterDTO) {
+        int currentPage = filterDTO.getPage();
+        int maxPage = (int)(countByFilter(filterDTO)+9)/10; // +9를 한 이유는 나머지 올림때문에
         List<Integer> range = new ArrayList<>();
 
         if (currentPage != 0)
             range.add(1); // 1페이지로 바로
-        if (!range.contains(currentPage/2)) // 1과 현재페이지의 중간
+        if (currentPage/2 > 1) // 1과 현재페이지의 중간
             range.add(currentPage/2);
 
-        for (int i = currentPage - 2; i <= currentPage + 2; i++) { // 현재 페이지 기준 -2 +2
+        for (int i = currentPage - 1; i <= currentPage + 3; i++) { // 현재 페이지 기준 -2 +2
             if (range.contains(i)) continue;
             if (!(1 <= i && i <= maxPage)) continue;
             range.add(i);
@@ -55,7 +58,7 @@ public class PostService {
 
         if (!range.contains((currentPage+maxPage)/2)) // 현재 페이지와 최대 페이지의 중간
             range.add((currentPage+maxPage)/2);
-        if (!range.contains(maxPage-1) && currentPage != maxPage-1) // 최대 페이지
+        if (!range.contains(maxPage) && currentPage != maxPage) // 최대 페이지
             range.add(maxPage);
         return range;
     }
