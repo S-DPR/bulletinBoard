@@ -5,6 +5,8 @@ import org.example.bulletinboard.service.AccountService;
 import org.example.bulletinboard.service.AccountSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -25,7 +27,8 @@ public class AccountController {
     }
 
     @PostMapping("")
-    public String login(@ModelAttribute Account account) {
+    public String login(@Validated @ModelAttribute Account account, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "redirect:/login";
         boolean result = accountService.login(account);
         if (!result) return "redirect:/login";
         accountSessionService.setAccountSession(account);
