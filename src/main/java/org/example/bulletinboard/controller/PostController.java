@@ -5,6 +5,8 @@ import org.example.bulletinboard.service.AccountSessionService;
 import org.example.bulletinboard.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +46,11 @@ public class PostController {
     }
 
     @PostMapping("/postWrite")
-    public String submitWritePost(@ModelAttribute Post post) {
+    public String submitWritePost(@Validated @ModelAttribute Post post, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("post", post);
+            return "/postWrite";
+        }
         postService.save(post);
         return "redirect:/" + post.getId();
     }
