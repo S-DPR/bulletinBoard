@@ -30,7 +30,9 @@
       </div>
       <hr>
       <div class="float-end">
-        <button id="mainBtn" class="btn btn-secondary">메인</button>
+        <a th:href="@{/(title=${param.title},content=${param.content},writer=${param.writer}, page=${param.page})}" class="btn btn-secondary">
+          목록
+        </a>
         <button id="editBtn" class="btn btn-secondary" th:if="${reader == post.writer}">수정</button>
         <button id="delBtn" class="btn btn-secondary" th:if="${reader == post.writer}">삭제</button>
       </div>
