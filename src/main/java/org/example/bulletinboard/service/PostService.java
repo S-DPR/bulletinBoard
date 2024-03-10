@@ -32,7 +32,7 @@ public class PostService {
 
     public Page<Post> findByFilter(FilterDTO filterDTO) {
         // 여기서 filterDTO.getPage는 1-based이므로
-        Pageable pageable = PageRequest.of(filterDTO.getPage()-1, 10, Sort.by("createTime"));
+        Pageable pageable = PageRequest.of(filterDTO.getPage()-1, 10, Sort.by("createTime").descending());
         return postRepository.findByFilter(filterDTO.getTitle(), filterDTO.getContent(), filterDTO.getWriter(), pageable);
     }
 
