@@ -7,26 +7,32 @@
     <script th:src="@{/js/utils.js}"></script>
 </head>
 <body>
-    <form th:action="@{/postWrite}" th:method="POST">
-        <input type="hidden" th:field="${post.id}">
-        <input type="hidden" th:field="${post.createTime}" th:if="${post.id}">
-        <input th:field="${post.writer}" readonly>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-text">Title</span>
-                <input type="text" class="form-control" th:field="${post.title}"
-                       aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-text">Content</span>
-                <textarea type="text" class="form-control" th:field="${post.content}"
-                          aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                style="height:100vh;"></textarea>
-            </div>
-        </div>
-        <button id="submitBtn" type="submit">완료</button>
-    </form>
+    <th:block th:replace="~{/fragment/cardFrame :: cardFrame(~{::content})}">
+        <th:block th:fragment="content">
+            <form th:action="@{/postWrite}" th:method="POST">
+                <input type="hidden" th:field="${post.id}">
+                <input type="hidden" th:field="${post.createTime}" th:if="${post.id}">
+                <input type="hidden" th:field="${post.writer}" readonly>
+                <div class="form-group">
+                    <div class="input-group d-flex justify-content-center">
+                        <input type="text" class="form-control" th:field="${post.title}"
+                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                placeholder="제목을 입력하세요">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="input-group">
+                        <textarea type="text" class="form-control" th:field="${post.content}"
+                                  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                  placeholder="내용을 입력하세요"
+                        style="height:60vh;"></textarea>
+                    </div>
+                </div>
+                <hr>
+                <button id="submitBtn" type="submit" class="btn btn-secondary float-end">완료</button>
+            </form>
+        </th:block>
+    </th:block>
 </body>
 </html>
