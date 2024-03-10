@@ -49,7 +49,7 @@ public class PostService {
         if (currentPage/2 > 1) // 1과 현재페이지의 중간
             range.add(currentPage/2);
 
-        for (int i = currentPage - 1; i <= currentPage + 3; i++) { // 현재 페이지 기준 -2 +2
+        for (int i = currentPage - 2; i <= currentPage + 2; i++) { // 현재 페이지 기준 -2 +2
             if (range.contains(i)) continue;
             if (!(1 <= i && i <= maxPage)) continue;
             range.add(i);
