@@ -45,8 +45,7 @@ public class PostService {
         int maxPage = (int)(countByFilter(filterDTO)+9)/10; // +9를 한 이유는 나머지 올림때문에
         List<Integer> range = new ArrayList<>();
 
-        if (currentPage != 0)
-            range.add(1); // 1페이지로 바로
+        range.add(1); // 1페이지로 바로
         if (currentPage/2 > 1) // 1과 현재페이지의 중간
             range.add(currentPage/2);
 
@@ -56,9 +55,9 @@ public class PostService {
             range.add(i);
         }
 
-        if (!range.contains((currentPage+maxPage)/2)) // 현재 페이지와 최대 페이지의 중간
+        if ((currentPage+maxPage)/2 > 1 && !range.contains((currentPage+maxPage)/2)) // 현재 페이지와 최대 페이지의 중간
             range.add((currentPage+maxPage)/2);
-        if (!range.contains(maxPage) && currentPage != maxPage) // 최대 페이지
+        if (maxPage != 0 && !range.contains(maxPage) && currentPage != maxPage) // 최대 페이지
             range.add(maxPage);
         return range;
     }
