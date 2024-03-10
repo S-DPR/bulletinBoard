@@ -21,10 +21,10 @@
                 <tbody id="postListTBody">
                     <tr th:each="post: ${posts}">
                         <td class="text-sm text-secondary mb-0">
-                            <a th:href="@{/{id}(id=${post.id})}" th:text="${post.title}"></a>
+                            <a th:href="@{/{id}(id=${post.id}, title=${param.title},content=${param.content},writer=${param.writer}, page=${param.page})}" th:text="${post.title}"></a>
                         </td>
                         <td class="text-sm text-secondary mb-0">
-                            <a th:href="@{/?writer={writer}(writer=${post.writer})}" th:text="${post.writer}"></a>
+                            <a th:href="@{/(writer=${post.writer})}" th:text="${post.writer}"></a>
                         </td>
                     </tr>
                 </tbody>
@@ -33,7 +33,7 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item" th:each="currentPage: ${pagination}">
-                            <a class="page-link" th:href="@{/?page={page}(page=${currentPage})}" th:text="${currentPage}"></a>
+                            <a class="page-link" th:href="@{/(title=${param.title},content=${param.content},writer=${param.writer},page=${currentPage})}" th:text="${currentPage}"></a>
                         </li>
                     </ul>
                 </nav>
