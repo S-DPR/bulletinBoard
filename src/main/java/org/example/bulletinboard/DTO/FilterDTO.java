@@ -10,4 +10,10 @@ public class FilterDTO {
     private String content;
     private String writer;
     private Integer page;
+
+    public int getPage() {
+        if (page == null)
+            return 1;
+        return page;
+    }
 }

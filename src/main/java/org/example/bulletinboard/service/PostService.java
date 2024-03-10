@@ -38,9 +38,7 @@ public class PostService {
         return postRepository.count();
     }
 
-    public List<Integer> getPaginationRange(Integer currentPage) {
-        if (currentPage == null)
-            currentPage = 1;
+    public List<Integer> getPaginationRange(int currentPage) {
         int maxPage = (int)count()/10;
         List<Integer> range = new ArrayList<>();
 
