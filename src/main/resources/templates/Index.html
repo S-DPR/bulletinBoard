@@ -31,9 +31,10 @@
             </table>
             <div class="d-flex justify-content-center">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
+                    <ul class="pagination" th:with="curPage=${param.page == null ? '1' : param.page[0]}">
                         <li class="page-item" th:each="currentPage: ${pagination}">
-                            <a class="page-link" th:href="@{/(title=${param.title},content=${param.content},writer=${param.writer},page=${currentPage})}" th:text="${currentPage}"></a>
+                            <a class="page-link" th:classappend="${#strings.toString(currentPage) == curPage ? 'active' : ''}"
+                               th:href="@{/(title=${param.title},content=${param.content},writer=${param.writer},page=${currentPage})}" th:text="${currentPage}"></a>
                         </li>
                     </ul>
                 </nav>
