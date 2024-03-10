@@ -1,8 +1,12 @@
 window.addEventListener('load', () => {
     // const postListTBody = document.querySelector('#postListTBody')
     const postWrite = document.querySelector('#postWrite')
+    const refresh = document.querySelector('#refresh')
     postWrite.addEventListener('click', () => {
         location.href = '/postWrite'
+    })
+    refresh.addEventListener('click', () => {
+        location.href = '/'
     })
 
 //     const refreshTable = () => {
