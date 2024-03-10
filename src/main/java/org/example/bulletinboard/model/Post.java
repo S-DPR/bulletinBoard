@@ -15,7 +15,8 @@ import java.sql.Timestamp;
 @EntityListeners(AuditingEntityListener.class)
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq_generator")
+    @SequenceGenerator(name="post_seq_generator", sequenceName = "post_SEQ", allocationSize = 1)
     private Long id;
     private String title;
     private String content;
