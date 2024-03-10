@@ -11,14 +11,22 @@
 <body>
     <th:block th:replace="~{/fragment/cardFrame :: cardFrame(~{::content})}">
         <th:block th:fragment="content">
-            <table class="table">
+            <table class="table" style="text-align: center;">
                 <thead class="bg-gray-100">
-                <tr style="text-align: center;">
-                    <th scope="col" class="text-secondary text-xs font-weight-semibold opacity-7 border-light" style="width: 70%;">제목</th>
-                    <th scope="col" class="text-secondary text-xs font-weight-semibold opacity-7 border-light ps-2" style="width: 30%;">작성자</th>
-                </tr>
+                    <tr>
+                        <td class="text-secondary text-xs font-weight-semibold opacity-7 border-light" style="width: 70%;">제목</td>
+                        <td class="text-secondary text-xs font-weight-semibold opacity-7 border-light ps-2" style="width: 30%;">작성자</td>
+                    </tr>
                 </thead>
                 <tbody id="postListTBody">
+                    <tr th:each="post: ${posts}">
+                        <td class="text-sm text-secondary mb-0">
+                            <a th:href="@{/{id}(id=${post.id})}" th:text="${post.title}"></a>
+                        </td>
+                        <td class="text-sm text-secondary mb-0">
+                            <a th:href="@{/?writer={writer}(writer=${post.writer})}" th:text="${post.writer}"></a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <button id="postWrite" type="button" class="btn btn-secondary float-end">글쓰기</button>
