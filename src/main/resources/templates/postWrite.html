@@ -5,6 +5,7 @@
     <title>Title</title>
     <th:block th:replace="~{/fragment/import :: bootstrapImport}"></th:block>
     <script th:src="@{/js/utils.js}"></script>
+    <script th:src="@{/js/postWrite.js}"></script>
 </head>
 <body>
     <th:block th:replace="~{/fragment/cardFrame :: cardFrame(~{::content})}">
@@ -30,7 +31,10 @@
                     </div>
                 </div>
                 <hr>
-                <button id="submitBtn" type="submit" class="btn btn-secondary float-end">완료</button>
+                <div class="float-end">
+                    <button id="cancelBtn" type="button" class="btn btn-secondary">취소</button>
+                    <button id="submitBtn" type="submit" class="btn btn-secondary" style="margin-left: 0.1vw">완료</button>
+                </div>
             </form>
         </th:block>
     </th:block>
