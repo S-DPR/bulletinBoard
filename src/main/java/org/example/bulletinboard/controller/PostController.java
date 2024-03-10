@@ -1,15 +1,15 @@
 package org.example.bulletinboard.controller;
 
+import org.example.bulletinboard.DTO.FilterDTO;
 import org.example.bulletinboard.model.Post;
 import org.example.bulletinboard.service.AccountSessionService;
 import org.example.bulletinboard.service.PostService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping
@@ -22,9 +22,9 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public String mainPage(Model model) {
-        List<Post> posts = postService.findAll();
-        model.addAttribute("posts", posts);
+    public String mainPage(@ModelAttribute FilterDTO filterDTO, Model model) {
+        Page<Post> posts = postService.findByFilter(filterDTO);
+        model.addAttribute("posts", posts.getContent());
         return "index";
     }
 
