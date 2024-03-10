@@ -2,11 +2,19 @@ window.addEventListener('load', () => {
     // const postListTBody = document.querySelector('#postListTBody')
     const postWrite = document.querySelector('#postWrite')
     const refresh = document.querySelector('#refresh')
+    const filterText = document.querySelector('#filterText')
+    const searchBtn = document.querySelector('#searchBtn')
+    const filterType = document.querySelector('#filterType')
     postWrite.addEventListener('click', () => {
         location.href = '/postWrite'
     })
     refresh.addEventListener('click', () => {
         location.href = '/'
+    })
+    searchBtn.addEventListener('click', () => {
+        const selectedIndex = filterType.selectedIndex
+        const selectedOption = filterType.options[selectedIndex]
+        location.href = `/?${selectedOption.value}=${filterText.value}`
     })
 
 //     const refreshTable = () => {
