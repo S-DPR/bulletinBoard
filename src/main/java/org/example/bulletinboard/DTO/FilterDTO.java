@@ -9,5 +9,5 @@ public class FilterDTO {
     private String title;
     private String content;
     private String writer;
-    private int page;
+    private Integer page;
 }
