@@ -1,6 +1,9 @@
 window.addEventListener('load', () => {
     const postListTBody = document.querySelector('#postListTBody')
-    const dels = document.querySelector('.del-btn') || []
+    const postWrite = document.querySelector('#postWrite')
+    postWrite.addEventListener('click', () => {
+        location.href = '/postWrite'
+    })
 
     const refreshTable = () => {
         requestFn(REQUEST_TYPE.GET, "/sys/post/", null, (data) => {
@@ -15,7 +18,7 @@ window.addEventListener('load', () => {
     }
 
     const createTitleTd = (data) => {
-        const td = document.createElement('td')
+        const td = createTd()
         const a = document.createElement('a')
         a.textContent = data.title
         a.href = `/${data.id}`
@@ -24,11 +27,19 @@ window.addEventListener('load', () => {
     }
 
     const createWriterTd = (data) => {
-        const td = document.createElement('td')
+        const td = createTd()
         const a = document.createElement('a')
         a.textContent = data.writer
 //        a.href = `/${data.id}`
         td.appendChild(a)
+        return td
+    }
+
+    const createTd = () => {
+        const td = document.createElement('td')
+        td.classList.add(...['text-sm', 'text-secondary', 'mb-0'])
+        td.scope = 'col'
+        td.style.textAlign = 'center'
         return td
     }
     refreshTable()
