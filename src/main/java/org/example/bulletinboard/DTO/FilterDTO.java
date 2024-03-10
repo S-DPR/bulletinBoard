@@ -1,6 +1,5 @@
 package org.example.bulletinboard.DTO;
 
-import lombok.Getter;
 import lombok.Setter;
 
 @Setter

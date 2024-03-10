@@ -30,6 +30,6 @@ public class PostRestController extends GenericRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity deletePost(@PathVariable String id) {
         postService.delete(id);
-        return response("200");
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
