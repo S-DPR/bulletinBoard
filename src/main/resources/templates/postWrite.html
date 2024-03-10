@@ -13,7 +13,7 @@
             <form th:action="@{/postWrite}" th:method="POST">
                 <input type="hidden" th:field="${post.id}">
                 <input type="hidden" th:field="${post.createTime}" th:if="${post.id}">
-                <input type="hidden" th:field="${post.writer}" readonly>
+                <input type="hidden" th:field="${post.writer}">
                 <div class="form-group">
                     <div class="input-group d-flex justify-content-center">
                         <input type="text" class="form-control" th:field="${post.title}"
