@@ -2,6 +2,8 @@ package org.example.bulletinboard.DTO;
 
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 public class FilterDTO {
     private String title;
@@ -31,5 +33,12 @@ public class FilterDTO {
         if (writer == null || writer.isEmpty())
             return null;
         return writer;
+    }
+
+    public List<String> getActivatedFilter() {
+        if (getTitle() != null) return List.of("title", title);
+        if (getContent() != null) return List.of("content", content);
+        if (getWriter() != null) return List.of("writer", writer);
+        return List.of("title", "");
     }
 }
